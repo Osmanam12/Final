@@ -35,7 +35,7 @@ workflow {
     )
 
     NFCORE_SEMINAR (
-        PIPELINE_INITIALISATION.out.samplesheet
+        PIPELINE_INITIALISATION.out.samplesheet )
    
     PIPELINE_COMPLETION (
         params.email,

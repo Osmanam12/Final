@@ -33,7 +33,7 @@ sjdbGTFfile                       Saccharomyces_cerevisiae.R64-1-1.115.gtf
 Number of fastq files for each mate = 1
 
    Input read files for mate 1 :
--rw-r--r-- 1 a25usmmu@hs.local student@hs.local 2220183 Mar 18 04:39 input1/RAP1_UNINDUCED_REP1_trimmed.fq.gz
+-rw-r--r-- 1 a25usmmu@hs.local student@hs.local 2220183 Mar 18 15:19 input1/RAP1_UNINDUCED_REP1_trimmed.fq.gz
 
    readsCommandsFile:
 exec > "RAP1_UNINDUCED_REP1._STARtmp/tmp.fifo.read1"
@@ -83,7 +83,7 @@ Number of real (reference) chromosomes= 17
 16	XVI	948066	13369344
 17	Mito	85779	14417920
 --sjdbOverhang = 100 taken from the generated genome
-Started loading the genome: Wed Mar 18 04:39:50 2026
+Started loading the genome: Wed Mar 18 15:19:23 2026
 
 Genome: size given as a parameter = 14681069
 SA: size given as a parameter = 100304370
@@ -97,29 +97,29 @@ Loading Genome ... done! state: good=1 eof=0 fail=0 bad=0; loaded 14681069 bytes
 SA file size: 100304370 bytes; state: good=1 eof=0 fail=0 bad=0
 Loading SA ... done! state: good=1 eof=0 fail=0 bad=0; loaded 100304370 bytes
 Loading SAindex ... done: 24466875 bytes
-Finished loading the genome: Wed Mar 18 04:39:50 2026
+Finished loading the genome: Wed Mar 18 15:19:23 2026
 
 Processing splice junctions database sjdbN=5,   pGe.sjdbOverhang=100 
 alignIntronMax=alignMatesGapMax=0, the max intron size will be approximately determined by (2^winBinNbits)*winAnchorDistNbins=589824
-Mar 18 04:39:50   Loaded database junctions from the generated genome star_index//sjdbList.out.tab: 5 total junctions
+Mar 18 15:19:23   Loaded database junctions from the generated genome star_index//sjdbList.out.tab: 5 total junctions
 
-Mar 18 04:39:50 ..... processing annotations GTF
+Mar 18 15:19:23 ..... processing annotations GTF
 Processing pGe.sjdbGTFfile=Saccharomyces_cerevisiae.R64-1-1.115.gtf, found:
 		7127 transcripts
 		7507 exons (non-collapsed)
 		364 collapsed junctions
 Total junctions: 369
-Mar 18 04:39:50 ..... finished GTF processing
+Mar 18 15:19:23 ..... finished GTF processing
 
-Mar 18 04:39:50   Finished preparing junctions
-Mar 18 04:39:50 ..... inserting junctions into the genome indices
-Mar 18 04:39:50   Finished SA search: number of new junctions=359, old junctions=5
-Mar 18 04:39:50   Finished sorting SA indicesL nInd=143600
+Mar 18 15:19:23   Finished preparing junctions
+Mar 18 15:19:23 ..... inserting junctions into the genome indices
+Mar 18 15:19:23   Finished SA search: number of new junctions=359, old junctions=5
+Mar 18 15:19:23   Finished sorting SA indicesL nInd=143600
 Genome size with junctions=14753228  14680064   73164
 GstrandBit1=32   GstrandBit=32
-Mar 18 04:39:50   Finished inserting junction indices
-Mar 18 04:39:50   Finished SAi
-Mar 18 04:39:50 ..... finished inserting junctions into genome
+Mar 18 15:19:23   Finished inserting junction indices
+Mar 18 15:19:23   Finished SAi
+Mar 18 15:19:23 ..... finished inserting junctions into genome
 Created thread # 1
 Starting to map file # 0
 mate 1:   input1/RAP1_UNINDUCED_REP1_trimmed.fq.gz
@@ -127,9 +127,9 @@ Thread #0 end of input stream, nextChar=-1
 Completed: thread #1
 Completed: thread #0
 Joined thread # 1
-Mar 18 04:39:52 ..... finished mapping
+Mar 18 15:19:25 ..... finished mapping
 RAM after mapping:
-VmPeak:	 2411552 kB; VmSize:	 2346172 kB; VmHWM:	  457740 kB; VmRSS:	  457696 kB; 
+VmPeak:	 2411552 kB; VmSize:	 2346176 kB; VmHWM:	  457732 kB; VmRSS:	  457704 kB; 
 RAM after freeing genome index memory:
-VmPeak:	 2411552 kB; VmSize:	  394308 kB; VmHWM:	  457740 kB; VmRSS:	  222904 kB; 
+VmPeak:	 2411552 kB; VmSize:	  394312 kB; VmHWM:	  457732 kB; VmRSS:	  222912 kB; 
 ALL DONE!
