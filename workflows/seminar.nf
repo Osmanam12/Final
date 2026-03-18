@@ -1,8 +1,4 @@
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+
 include { FASTQC                 } from '../modules/nf-core/fastqc/main'
 include { TRIMGALORE             } from '../modules/nf-core/trimgalore/main'
 include { STAR_ALIGN             } from '../modules/nf-core/star/align/main'
@@ -13,12 +9,6 @@ include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_seminar_pipeline'
 
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    RUN MAIN WORKFLOW
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
 workflow SEMINAR {
 
     take:
@@ -28,32 +18,22 @@ workflow SEMINAR {
 
     ch_multiqc_files = Channel.empty()
 
-    // Reference channels from params
     ch_star_index    = Channel.value([ [:], file(params.star_index, checkIfExists: true) ])
     ch_gtf           = Channel.value([ [:], file(params.gtf, checkIfExists: true) ])
     ch_salmon_index  = file(params.salmon_index, checkIfExists: true)
     ch_transcriptome = file(params.transcriptome, checkIfExists: true)
 
-    //
-    // MODULE: Run FastQC on raw reads
-    //
     FASTQC(
         ch_samplesheet
     )
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect { it[1] })
 
-    //
-    // MODULE: Run TrimGalore
-    //
     TRIMGALORE(
         ch_samplesheet
     )
     ch_multiqc_files = ch_multiqc_files.mix(TRIMGALORE.out.zip.collect { it[1] })
     ch_multiqc_files = ch_multiqc_files.mix(TRIMGALORE.out.log.collect { it[1] })
 
-    //
-    // MODULE: Run STAR align
-    //
     STAR_ALIGN(
         TRIMGALORE.out.reads,
         ch_star_index,
@@ -62,9 +42,6 @@ workflow SEMINAR {
     )
     ch_multiqc_files = ch_multiqc_files.mix(STAR_ALIGN.out.log_final.collect { it[1] })
 
-    //
-    // MODULE: Run Salmon quant
-    //
     SALMON_QUANT(
         TRIMGALORE.out.reads,
         ch_salmon_index,
@@ -74,9 +51,6 @@ workflow SEMINAR {
         false
     )
 
-    //
-    // MODULE: MultiQC
-    //
     ch_multiqc_config        = Channel.fromPath(
         "$projectDir/assets/multiqc_config.yml", checkIfExists: true)
     ch_multiqc_custom_config = params.multiqc_config ?
@@ -122,9 +96,3 @@ workflow SEMINAR {
     multiqc_report = MULTIQC.out.report.toList()
     versions       = Channel.empty()
 }
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    THE END
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
