@@ -1,11 +1,11 @@
 #!/usr/bin/env nextflow
 
-include { SEMINAR  } from './workflows/seminar'
-include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_seminar_pipeline'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_seminar_pipeline'
-include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_seminar_pipeline'
+include { SEMINAR  } from '${Final}/workflows/seminar'
+include { PIPELINE_INITIALISATION } from '${Final}/subworkflows/local/utils_nfcore_seminar_pipeline'
+include { PIPELINE_COMPLETION     } from '${Final}/subworkflows/local/utils_nfcore_seminar_pipeline'
+include { getGenomeAttribute      } from '${Final}/subworkflows/local/utils_nfcore_seminar_pipeline'
 
-params.fasta = getGenomeAttribute('fasta')
+
 
 workflow NFCORE_SEMINAR {
 
@@ -13,7 +13,7 @@ workflow NFCORE_SEMINAR {
     samplesheet // channel: samplesheet read in from --input
 
     main:
-
+ 
     SEMINAR (
         samplesheet
     )
@@ -24,12 +24,12 @@ workflow NFCORE_SEMINAR {
 workflow {
 
     main:
-
+    params.fasta = getGenomeAttribute('fasta')
     PIPELINE_INITIALISATION (
         params.version,
         params.validate_params,
         params.monochrome_logs,
-        //args,
+        args,
         params.outdir,
         params.input
     )
