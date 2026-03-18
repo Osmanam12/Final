@@ -29,7 +29,7 @@ workflow {
         params.version,
         params.validate_params,
         params.monochrome_logs,
-        args,
+        //args,
         params.outdir,
         params.input
     )
